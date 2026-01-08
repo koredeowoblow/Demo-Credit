@@ -4,23 +4,19 @@
         "module": "esnext",
         "moduleResolution": "node",
         "outDir": "./dist",
-        "rootDir": ".",
+        "rootDir": "./src",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
         "types": [
             "node"
-        ],
-        "lib": [
-            "es2020"
         ]
     },
     "include": [
-        "src/**/*",
-        "knexfile.ts"
+        "src/**/*"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "tests"
     ]
 }

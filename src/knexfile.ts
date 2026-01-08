@@ -1,9 +1,12 @@
+import type { Knex } from "knex";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const config = {
+
+const config: { [key: string]: Knex.Config } = {
     development: {
         client: "mysql2",
         connection: {
@@ -20,6 +23,7 @@ const config = {
             directory: path.join(__dirname, "database", "seeds")
         }
     },
+
     production: {
         client: "pg",
         connection: {
@@ -35,4 +39,5 @@ const config = {
         }
     }
 };
+
 export default config;
