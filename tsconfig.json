@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "outDir": "./dist",
+        "rootDir": ".",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "src/**/*",
+        "tests/**/*",
+        "knexfile.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

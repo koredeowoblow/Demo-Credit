@@ -1,0 +1,104 @@
+/**
+ * Unified Response Handler
+ * Standardizes API responses across the application
+ */
+import { Response } from "express";
+
+export class ResponseHandler {
+    /**
+     * Send a success response
+     * @param {Object} res - Express response object
+     * @param {any} data - Data to send in the response
+     * @param {string} message - Success message
+     * @param {number} statusCode - HTTP status code (default 200)
+     * @param {Object} meta - Additional metadata
+     */
+    static success(res: Response, data: any = null, message: string = 'Operation successful', statusCode: number = 200, meta: object = {}) {
+        return res.status(statusCode).json({
+            success: true,
+            message,
+            data,
+            meta: {
+                timestamp: new Date().toISOString(),
+                ...meta
+            }
+        });
+    }
+
+    /**
+     * Send an error response
+     * @param {Object} res - Express response object
+     * @param {Object} error - Error object or details
+     */
+    static error(res: Response, error: any) {
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Internal Server Error';
+        const errorCode = error.code || 'INTERNAL_ERROR';
+        const errorType = error.constructor.name || 'Error';
+
+        // Ensure we don't leak stack traces in production
+        const isDevelopment = process.env.NODE_ENV === 'development';
+
+        return res.status(statusCode).json({
+            success: false,
+            message,
+            error: {
+                code: errorCode,
+                type: errorType,
+                details: error.details || null,
+                stack: isDevelopment ? error.stack : undefined
+            }
+        });
+    }
+}
+
+/**
+ * Custom application error classes
+ */
+export class AppError extends Error {
+    statusCode: number;
+    code: string;
+    details: any;
+
+    constructor(message: string, statusCode: number, code: string, details: any = null) {
+        super(message);
+        this.name = this.constructor.name;
+        this.statusCode = statusCode;
+        this.code = code;
+        this.details = details;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
+export class ValidationError extends AppError {
+    constructor(message: string, details: any = null) {
+        super(message, 400, 'VALIDATION_ERROR', details);
+    }
+}
+
+export class AuthenticationError extends AppError {
+    constructor(message: string = 'Authentication failed') {
+        super(message, 401, 'AUTHENTICATION_ERROR');
+    }
+}
+
+export class AuthorizationError extends AppError {
+    constructor(message: string = 'Access denied') {
+        super(message, 403, 'AUTHORIZATION_ERROR');
+    }
+}
+
+export class NotFoundError extends AppError {
+    constructor(message: string = 'Resource not found') {
+        super(message, 404, 'NOT_FOUND');
+    }
+}
+
+export class ConflictError extends AppError {
+    constructor(message: string) {
+        super(message, 409, 'CONFLICT_ERROR');
+    }
+}
+
+export const ForbiddenError = AuthorizationError;
+export const UnauthorizedError = AuthenticationError;

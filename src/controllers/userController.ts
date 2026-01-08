@@ -1,0 +1,29 @@
+import { Request, Response, NextFunction } from "express";
+import { UserService } from "../services/userService";
+import { signToken } from "../utils/jwt";
+import { ResponseHandler } from "../utils/responseHandler";
+
+export class UserController {
+    register = async (req: Request, res: Response, next: NextFunction) => {
+        const user = await UserService.registerUser(req.body);
+        const token = signToken({ id: user.id, email: user.email });
+
+        return ResponseHandler.success(res, {
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+            },
+            token,
+        }, "User created successfully", 201);
+    };
+
+    login = async (req: Request, res: Response, next: NextFunction) => {
+        const user = await UserService.loginUser(req.body);
+        const token = signToken({ id: user.id, email: user.email });
+
+        return ResponseHandler.success(res, {
+            token
+        }, "Login successful", 200);
+    }
+}
