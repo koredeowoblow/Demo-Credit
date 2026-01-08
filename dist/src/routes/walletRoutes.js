@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { authenticate } from "../middlewares/auth";
+import { WalletController } from "../controllers/walletController";
+import { tryCatch } from "../utils/try-catch";
+const router = Router();
+const walletController = new WalletController();
+router.use(authenticate);
+router.get("/", tryCatch(walletController.getWallet));
+router.post("/fund", tryCatch(walletController.fund));
+router.post("/transfer", tryCatch(walletController.transfer));
+router.post("/withdraw", tryCatch(walletController.withdraw));
+export default router;
