@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { UserService } from "../services/userService";
-import { signToken } from "../utils/jwt";
-import { ResponseHandler } from "../utils/responseHandler";
+import { UserService } from "../services/userService.js";
+import { signToken } from "../utils/jwt.js";
+import { ResponseHandler } from "../utils/responseHandler.js";
 
 export class UserController {
     register = async (req: Request, res: Response, next: NextFunction) => {

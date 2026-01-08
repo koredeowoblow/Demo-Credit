@@ -3,10 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Adjusted path to .env. 
-// In dev: src/knexfile.ts -> __dirname is src/. .env is ../.env
-// In prod: dist/knexfile.js -> __dirname is dist/. .env is ../.env
-dotenv.config({ path: path.join(__dirname, "../.env") });
+dotenv.config({ path: path.join(__dirname, ".env") });
 const config = {
     development: {
         client: "mysql2",
@@ -18,12 +15,11 @@ const config = {
             port: Number(process.env.DB_PORT),
         },
         migrations: {
-            // Adjusted paths to be relative to the location of this file
-            directory: path.join(__dirname, "database", "migrations"),
+            directory: path.join(__dirname, "src", "database", "migrations"),
             extension: "ts",
         },
         seeds: {
-            directory: path.join(__dirname, "database", "seeds"),
+            directory: path.join(__dirname, "src", "database", "seeds"),
             extension: "ts",
         },
     },
@@ -32,10 +28,10 @@ const config = {
         connection: ":memory:",
         useNullAsDefault: true,
         migrations: {
-            directory: path.join(__dirname, "database", "migrations"),
+            directory: path.join(__dirname, "src", "database", "migrations"),
         },
         seeds: {
-            directory: path.join(__dirname, "database", "seeds"),
+            directory: path.join(__dirname, "src", "database", "seeds"),
         },
     },
     production: {
@@ -48,7 +44,7 @@ const config = {
             port: Number(process.env.DB_PORT),
         },
         migrations: {
-            directory: path.join(__dirname, "database", "migrations"),
+            directory: path.join(__dirname, "src", "database", "migrations"),
         },
     },
 };

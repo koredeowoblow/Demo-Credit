@@ -1,7 +1,7 @@
 import { Response, NextFunction } from "express";
-import { AuthenticatedRequest } from "../middlewares/auth";
-import { WalletService } from "../services/walletService";
-import { ResponseHandler } from "../utils/responseHandler";
+import { AuthenticatedRequest } from "../middlewares/auth.js";
+import { WalletService } from "../services/walletService.js";
+import { ResponseHandler } from "../utils/responseHandler.js";
 
 export class WalletController {
     getWallet = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
