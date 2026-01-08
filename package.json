@@ -4,12 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "start": "tsx src/server.ts",
     "dev": "nodemon --exec tsx src/server.ts",
-    "migrate": "node --import tsx node_modules/knex/bin/cli.js --knexfile knexfile.ts migrate:latest",
-    "migrate:make": "node --import tsx node_modules/knex/bin/cli.js --knexfile knexfile.ts migrate:make",
-    "migrate:rollback": "node --import tsx node_modules/knex/bin/cli.js --knexfile knexfile.ts migrate:rollback"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "migrate": "node dist/knexfile.js migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "node dist/knexfile.js migrate:rollback",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
