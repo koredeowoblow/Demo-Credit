@@ -3,7 +3,10 @@ import { verifyToken } from "../utils/jwt.js";
 import { AuthenticationError } from "../utils/responseHandler.js";
 
 export interface AuthenticatedRequest extends Request {
-    user?: any;
+    user?: {
+        id: string;
+        email: string;
+    };
 }
 
 export const authenticate = (
@@ -24,6 +27,6 @@ export const authenticate = (
         return next(new AuthenticationError("Invalid or expired token"));
     }
 
-    req.user = decoded;
+    req.user = decoded as { id: string; email: string };
     next();
 };

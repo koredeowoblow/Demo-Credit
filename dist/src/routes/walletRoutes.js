@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { authenticate } from "../middlewares/auth";
-import { WalletController } from "../controllers/walletController";
-import { tryCatch } from "../utils/try-catch";
+import { authenticate } from "../middlewares/auth.js";
+import { WalletController } from "../controllers/walletController.js";
+import { tryCatch } from "../utils/try-catch.js";
 const router = Router();
 const walletController = new WalletController();
 router.use(authenticate);

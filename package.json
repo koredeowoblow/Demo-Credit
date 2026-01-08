@@ -7,9 +7,9 @@
     "dev": "nodemon --exec tsx src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "migrate": "node dist/knexfile.js migrate:latest",
-    "migrate:make": "knex migrate:make",
-    "migrate:rollback": "node dist/knexfile.js migrate:rollback",
+    "migrate": "npx knex migrate:latest --knexfile dist/knexfile.js",
+    "migrate:make": "npx knex migrate:make --knexfile dist/knexfile.js -x ts",
+    "migrate:rollback": "npx knex migrate:rollback --knexfile dist/knexfile.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],

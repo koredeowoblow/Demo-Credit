@@ -1,8 +1,8 @@
-import db from "../database";
+import db from "../database/index.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import { KarmaService } from "./karmaService";
-import { ConflictError, AuthorizationError, AuthenticationError } from "../utils/responseHandler";
+import { KarmaService } from "./karmaService.js";
+import { ConflictError, AuthorizationError, AuthenticationError } from "../utils/responseHandler.js";
 export class UserService {
     static async registerUser(data) {
         const { name, email, password } = data;

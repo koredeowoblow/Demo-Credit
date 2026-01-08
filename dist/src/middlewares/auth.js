@@ -1,5 +1,5 @@
-import { verifyToken } from "../utils/jwt";
-import { AuthenticationError } from "../utils/responseHandler";
+import { verifyToken } from "../utils/jwt.js";
+import { AuthenticationError } from "../utils/responseHandler.js";
 export const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {

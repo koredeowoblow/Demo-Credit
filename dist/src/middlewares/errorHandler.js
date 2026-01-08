@@ -1,4 +1,4 @@
-import { ResponseHandler } from "../utils/responseHandler";
+import { ResponseHandler } from "../utils/responseHandler.js";
 export const errorHandler = (err, req, res, next) => {
     // Log error for debugging
     console.error(err);

@@ -1,6 +1,6 @@
-import { UserService } from "../services/userService";
-import { signToken } from "../utils/jwt";
-import { ResponseHandler } from "../utils/responseHandler";
+import { UserService } from "../services/userService.js";
+import { signToken } from "../utils/jwt.js";
+import { ResponseHandler } from "../utils/responseHandler.js";
 export class UserController {
     constructor() {
         this.register = async (req, res, next) => {

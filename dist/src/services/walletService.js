@@ -1,5 +1,5 @@
-import db from "../database";
-import { NotFoundError, ValidationError } from "../utils/responseHandler";
+import db from "../database/index.js";
+import { NotFoundError, ValidationError } from "../utils/responseHandler.js";
 import { v4 as uuidv4 } from "uuid";
 export class WalletService {
     static async getWalletByUserId(userId) {
